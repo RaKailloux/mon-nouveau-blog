@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Accueil</title>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    {% block content %}
+        <h1> Bienvenue sur la borne Target Basket ! </h1>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Déconnexion</a>
+
+        {%else%}
+            <a href="{% url 'login_url' %}"> Connexion</a>
+            <a href="{% url 'register_url' %}" > Inscription </a>
+        {% endif %}
+    {% endblock %}
+    
+</body>
+</html>

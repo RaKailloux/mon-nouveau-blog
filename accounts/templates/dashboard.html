@@ -1,0 +1,6 @@
+{%extends 'index.html'%}
+
+{%block content %}
+    <h1>Bienvenue , {{user.username}}</h1>
+    <span><a href ="{% url 'quitter' %}">Déconnexion</a></span>
+{%endblock %}
