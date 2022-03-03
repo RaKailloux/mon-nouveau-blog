@@ -1,6 +1,553 @@
-{%extends 'index.html'%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>Target Basket</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        
+    <style>
+        body,html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: rgb(232, 97, 54); !important;
+        }
+            
+        td, th {
+            border: 1px solid rgb(0, 0, 0);
+            padding: 10px;
+        }
+        
+        td {
+            text-align: center;
+        }
+        
+        tr {
+            background-color: rgb(0, 225, 255);
+        }
+        
+        th[scope="col"] {
+            background-color: #048b9a;
+            color: 	rgb(0,100,0);
+            font-size: 1.4em;
+        }
+        
+        th[scope="row"] {
+            background-color: #3AF24B;
+            font-size: 1.4em;
+        }
+        
+        th[scope="raw"] {
+            background-color: #57D53B;
+            font-size: 1.4em;
+        }
+        
+        th[scope="ruw"] {
+            background-color: #3A9D23;
+            font-size: 1.4em;
+        }
+        caption {
+            padding: 10px;
+            caption-side: bottom;
+        }
+        
+        table {
+            border-collapse: collapse;
+            border: 2px solid black;
+            letter-spacing: 1px;
+            font-family: sans-serif;
+            font-size: 1rem;
+            margin: auto;
+        
+        }
+        header{
+            text-align: right;
+        }
+        
+        caption{
+            font-size: 1.3rem;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            color : yellow;
+        }
+        h2 {
+            color :white;
+            text-align: left;
+        }
+        .encadrer-un-contenu{
+        
+            float: right;
+        }
+        
+        header {
+            background-color: #2c2f33;
+        }
+        
+        footer{
+            background-color: #24262b;
+            padding: 65px 0;
+            margin : 20px 0;
+        }
+        
+        .footer-col {
+            width: auto;
+            padding: 0 15px;
+            float: left;
+            width: auto;
+            
+        }
+        .row:after {
+            content: "";
+            display: flex;
+            clear: both;
+          }
+        
+        .footer-col h4 {
+            font-size: 20px;
+            color: #ffffff;
+            text-transform: capitalize;
+            margin-bottom: 25px;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        
+        .footer-col h4::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            background-color: red;
+            height: 2px;
+            box-sizing: border-box;
+            width: 50px;
+        }
+        
+        
+        .footer-col ul li a {
+            font-size: 16px;
+            text-transform: capitalize;
+            color: red;
+            text-decoration: none;
+            font-weight: 300;
+            color: gray;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            padding-left: 8px;
+        
+        }
+       :root {
+    --bs-blue: #0d6efd;
+    --bs-noir: #0e0a0a;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+    --bs-primary-rgb: 13, 110, 253;
+    --bs-secondary-rgb: 108, 117, 125;
+    --bs-success-rgb: 25, 135, 84;
+    --bs-info-rgb: 13, 202, 240;
+    --bs-warning-rgb: 255, 193, 7;
+    --bs-danger-rgb: 220, 53, 69;
+    --bs-light-rgb: 248, 249, 250;
+    --bs-dark-rgb: 33, 37, 41;
+    --bs-white-rgb: 255, 255, 255;
+    --bs-black-rgb: 0, 0, 0;
+    --bs-body-color-rgb: 33, 37, 41;
+    --bs-body-bg-rgb: 255, 255, 255;
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    --bs-body-font-family: var(--bs-font-sans-serif);
+    --bs-body-font-size: 1rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 1.5;
+    --bs-body-color: #0e0a0a;
+    --bs-body-bg: rgb(232, 97, 54);
+}
 
-{%block content %}
-    <h1>Bienvenue , {{user.username}}</h1>
-    <span><a href ="{% url 'quitter' %}">Déconnexion</a></span>
-{%endblock %}
+body {
+    margin: 0;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    color: var(--bs-body-color);
+    text-align: var(--bs-body-text-align);
+    background-color: var(--bs-body-bg);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgb(14, 10, 10);
+}   
+      
+      table {
+        border-collapse: collapse;
+        border: 2px solid rgb(200,200,200);
+        letter-spacing: 1px;
+        font-size: 0.8rem;
+        align-content: center;
+      }
+      
+      td, th {
+        border: 1px solid  ;
+        padding: 10px 20px;
+      }
+      
+      td {
+        text-align: center;
+      }
+      
+      tr:nth-child(even) td {
+        background-color: rgb(250,250,250);
+      }
+      
+      tr:nth-child(odd) td {
+        background-color: rgb(245,245,245);
+      }
+      
+      caption {
+        padding: 10px;
+      }
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+}
+
+
+.container,
+.container-fluid,
+.container-xxl,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
+    width: 100%;
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 0.75rem);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-outline-dark {
+    color: #212529;
+    border-color: #212529;
+}
+
+.btn-outline-dark:hover {
+    color: #fff;
+    background-color: #212529;
+    border-color: #212529;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.navbar>.container,
+.navbar>.container-fluid,
+.navbar>.container-sm,
+.navbar>.container-md,
+.navbar>.container-lg,
+.navbar>.container-xl,
+.navbar>.container-xxl {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.navbar-toggler {
+    padding: 0.25rem 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+    .navbar-expand-lg .navbar-nav-scroll {
+        overflow: visible;
+    }
+    .navbar-expand-lg .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+    }
+    .navbar-expand-lg .navbar-toggler {
+        display: none;
+    }
+
+.px-3 {
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+}
+
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+.text-white {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+}
+
+
+
+
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-dark {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1170px;
+    margin: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul {
+    list-style: none;
+}
+
+.footer {
+    background-color: #24262b;
+    padding: 70px 0;
+}
+
+.footer-col {
+    width: 25%;
+    padding: 0 15px;
+}
+
+
+
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: rgb(255, 0, 0);
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+
+.footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
+}
+
+.footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+.footer-col .social-links a:hover{
+    color: #24262b;
+    background-color: #ffffff;
+}
+
+        </style>
+</head>
+<body>
+    <!-- Header-->
+    <header>
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Target Basket</h1>
+            </div>
+        </div>
+        {%block content %}
+        <h2>Bienvenue {{user.username}}, sur la borne du Target Basket !</h2>
+        
+        {%endblock %}
+    </header>
+    
+    <span class="encadrer-un-contenu"><a href ="{% url 'quitter' %}">Déconnexion</a></span>
+    <br>
+        <table>
+            <caption><strong><u>3 premiers Target Basket</u> </strong></caption>
+            <tr>
+                <th scope="col">Utilisateurs</th>
+                <th scope="col">Points</th>
+                <th scope="col">Classements</th>
+            </tr>
+            <tr>
+                <th scope="row">{{user.username}}</th>
+                <th scope="row">100</td>
+                <th scope="row">1er</td>
+            </tr>
+            <tr>
+                <th scope="raw">Utilisateur2</th>
+                <th scope="raw">75</td>
+                <th scope="raw">2e</td>
+            </tr>
+            <tr>
+                <th scope="ruw">Utilisateur3</th>
+                <th scope="ruw">50</td>
+                <th scope="ruw">3e</td>
+            </tr>
+        </table>
+    <br>
+    <article>
+        <table>
+            <caption><strong><u>Vos résultats</u> </strong></caption>
+            <tr>
+                <th scope="col">Utilisateurs</th>
+                <th scope="col">Résultat précedent</th>
+                <th scope="col">Moyenne de tes points</th>
+            </tr>
+    
+            <tr>
+                <th scope="row">Utilisateur1</th>
+                <th scope="row">100</td>
+                <th scope="row">1er</td>
+            </tr>
+    
+            <tr>
+                <th scope="raw">Utilisateur2</th>
+                <th scope="raw">75</td>
+                <th scope="raw">2e</td>
+            </tr>
+            
+            <tr>
+                <th scope="ruw">Utilisateur3</th>
+                <th scope="ruw">50</td>
+                <th scope="ruw">3e</td>
+            </tr>
+        </table>
+    </article>
+    <!-- Footer-->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>Target Basket</h4>
+                    <ul>
+                        <li><a href="#">à propos de nous</a></li>
+                        <li><a href="#">nos services</a></li>
+                        <li><a href="#">politique de confidentialité</a></li>
+
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>service cilent</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>information legal</h4>
+                    <ul>
+                        <li><a href="#">conditions generals</a></li>
+                        <li><a href="#">protection des données</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Nos réseaux</h4>
+                    <ul>
+                        
+                        {% load static %}
+                        <a href="https://www.instagram.com/_target_basket_/" style="position:relative" target="blanket"><img src={% static 'accounts\templates\static\insta.jpg' %}  alt="Logo_Tesla" height="35" width="35"></a>  
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
